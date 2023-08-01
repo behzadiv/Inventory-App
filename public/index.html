@@ -6,10 +6,243 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inventory</title>
     <link rel="stylesheet" href="./tailwind.css" />
+    <link rel="stylesheet" href="../src/css/fontawesome.min.css" />
   </head>
-  <body>
-    <h1 class="bg-blue-200 text-center text-blue-800 text-2xl">
-      inventory-app
-    </h1>
+  <body class="bg-slate-100">
+    <header class="bg-blue-200">
+      <div class="container flex justify-center gap-x-4 p-2">
+        <h1>Inventory-App</h1>
+        <span
+          class="bg-white w-6 h-6 rounded-full flex justify-center items-center text-blue-400"
+          >3</span
+        >
+      </div>
+    </header>
+    <section class="container md:max-w-screen-md py-3 flex gap-2 flex-wrap">
+      <div
+        class="flex flex-1 flex-col text-center gap-y-2 border border-slate-300 rounded-md p-4"
+      >
+        <h1 class="font-bold">Add New Category</h1>
+        <div class="flex flex-col text-start gap-y-1">
+          <p class="text-xs px-1">Category Title :</p>
+          <input
+            type="text"
+            placeholder="title..."
+            class="border border-slate-300 rounded-md p-1 px-3"
+          />
+        </div>
+        <div class="flex flex-col text-start gap-y-1">
+          <p class="text-xs px-1">Category Description :</p>
+          <textarea
+            class="border border-slate-300 rounded-md p-1 px-3"
+            name=""
+            id=""
+            cols="30"
+            rows="4"
+            placeholder="category description..."
+          ></textarea>
+        </div>
+        <div class="flex justify-between gap-x-1">
+          <button
+            class="border bg-red-400 rounded-md flex-1 text-white py-1 cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            class="border bg-blue-300 rounded-md flex-1 text-white py-1 cursor-pointer"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex flex-1 flex-col text-center justify-between border border-slate-300 rounded-md p-4"
+      >
+        <h1 class="font-bold">Add New Product</h1>
+        <div class="flex flex-col text-start gap-y-1">
+          <p class="text-xs px-1">Product Title :</p>
+          <input
+            type="text"
+            placeholder="title..."
+            class="border border-slate-300 rounded-md p-1 px-3"
+          />
+        </div>
+        <div class="flex flex-col text-start gap-y-1">
+          <p class="text-xs px-1">Product Quantity :</p>
+          <input
+            type="number"
+            min="0"
+            class="border border-slate-300 rounded-md p-1 px-3"
+          />
+        </div>
+        <div class="flex flex-col text-start gap-y-1">
+          <p class="text-xs px-1">Product Category :</p>
+          <select
+            class="border border-slate-300 rounded-md p-1 px-3"
+            name="category"
+            id=""
+          >
+            <option value="backend">back-end</option>
+            <option value="frontend">front-end</option>
+          </select>
+        </div>
+        <button
+          class="border bg-blue-300 rounded-md text-white py-1 cursor-pointer"
+        >
+          Add
+        </button>
+      </div>
+    </section>
+    <section class="container md:max-w-screen-md py-3">
+      <div class="flex flex-col gap-y-2 rounded-md p-4 border border-slate-300 bg-lime-300 ">
+        <div class="flex justify-center">
+          <div class="flex flex-1 flex-col text-start gap-y-1">
+            <p class="text-xs px-1">Search Product :</p>
+            <input
+              type="text"
+              placeholder="search..."
+              class="w-2/3 border border-slate-300 p-1 rounded-md"
+            />
+          </div>
+          <div class="flex flex-1 flex-col text-start gap-y-1">
+            <p class="text-xs px-1">Sort :</p>
+            <select
+              class="w-2/3 border border-slate-300 rounded-md p-1 px-3"
+              name="category"
+              id=""
+            >
+              <option value="older">Older</option>
+              <option value="newer">Newer</option>
+            </select>
+          </div>
+        </div>
+        <div class="max-h-40 overflow-y-scroll py-1">
+            <div class="flex flex-col gap-y-1">
+                <div
+                  class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+                >
+                  <h2 class="flex-4">node.js</h2>
+                  <div class="flex flex-8  items-center gap-x-3">
+                      <p>22/2/2023</p>
+                  <p
+                    class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+                  >
+                    front-end
+                  </p>
+                  <span
+                    class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                    >120</span
+                  >
+                  <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+                  </div>
+                </div>         
+              </div>
+              <div class="flex flex-col gap-y-1">
+                <div
+                  class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+                >
+                  <h2 class="flex-4">node.js</h2>
+                  <div class="flex flex-8  items-center gap-x-3">
+                      <p>22/2/2023</p>
+                  <p
+                    class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+                  >
+                    front-end
+                  </p>
+                  <span
+                    class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                    >120</span
+                  >
+                  <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+                  </div>
+                </div>         
+              </div>
+              <div class="flex flex-col gap-y-1">
+                <div
+                  class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+                >
+                  <h2 class="flex-4">node.js</h2>
+                  <div class="flex flex-8  items-center gap-x-3">
+                      <p>22/2/2023</p>
+                  <p
+                    class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+                  >
+                    front-end
+                  </p>
+                  <span
+                    class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                    >120</span
+                  >
+                  <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+                  </div>
+                </div>         
+              </div>
+              <div class="flex flex-col gap-y-1">
+                <div
+                  class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+                >
+                  <h2 class="flex-4">node.js</h2>
+                  <div class="flex flex-8  items-center gap-x-3">
+                      <p>22/2/2023</p>
+                  <p
+                    class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+                  >
+                    front-end
+                  </p>
+                  <span
+                    class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                    >120</span
+                  >
+                  <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+                  </div>
+                </div>         
+              </div>
+              <div class="flex flex-col gap-y-1">
+                <div
+                  class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+                >
+                  <h2 class="flex-4">node.js</h2>
+                  <div class="flex flex-8  items-center gap-x-3">
+                      <p>22/2/2023</p>
+                  <p
+                    class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+                  >
+                    front-end
+                  </p>
+                  <span
+                    class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                    >120</span
+                  >
+                  <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+                  </div>
+                </div>         
+              </div>
+              <div class="flex flex-col gap-y-1">
+                <div
+                  class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+                >
+                  <h2 class="flex-4">node.js</h2>
+                  <div class="flex flex-8  items-center gap-x-3">
+                      <p>22/2/2023</p>
+                  <p
+                    class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+                  >
+                    front-end
+                  </p>
+                  <span
+                    class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                    >120</span
+                  >
+                  <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+                  </div>
+                </div>         
+              </div>
+        </div>
+      </div>
+    </section>
   </body>
+  <script
+    src="https://kit.fontawesome.com/3ae8181c46.js"
+    crossorigin="anonymous"
+  ></script>
 </html>

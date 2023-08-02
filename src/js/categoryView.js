@@ -17,6 +17,9 @@ class CategoryView {
     this.categories = Storage.getAllCategories();
     this.createCategoryList();
   }
+  setApp() {
+    this.categories = Storage.getAllCategories();
+  }
 }
 
 export default new CategoryView(); 

@@ -20,6 +20,7 @@ class ProductView {
       category: productCategoryTitle,
     });
     this.products = Storage.getAllProducts();
+    this.createProductListView(this.products);
   }
   _getCategoryTitle(id) {
     const findedCategory = Storage.getAllCategories().find(
@@ -30,6 +31,33 @@ class ProductView {
 
   setApp() {
     this.products = Storage.getAllProducts();
+  }
+  createProductListView(products = this.products) {
+    let result = "";
+    const productList = document.querySelector("#product-list");
+    products.forEach((p) => {
+      return (result += `<div class="flex flex-col gap-y-1">
+          <div
+            class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
+          >
+            <h2 class="flex-4">${p.title}</h2>
+            <div class="flex flex-8 items-center gap-x-3">
+              <p>${new Date(p.createdAt).toLocaleDateString()}</p>
+              <p
+                class="border border-slate-300 bg-slate-300 text-white rounded-md px-3 py-1 text-sm"
+              >
+                ${p.category}
+              </p>
+              <span
+                class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
+                >${p.qty}</span
+              >
+              <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+            </div>
+          </div>
+        </div>`);
+    });
+    productList.innerHTML = result;
   }
 }
 

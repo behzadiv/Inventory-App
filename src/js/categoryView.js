@@ -20,6 +20,14 @@ class CategoryView {
   setApp() {
     this.categories = Storage.getAllCategories();
   }
+  createCategoryList() {
+    const categoryDom = document.querySelector("#select-category");
+    let result = `<option value="">Select Category</option>`;
+    this.categories.forEach(
+      (c) => (result += `<option value=${c.id}>${c.title}</option>`)
+    );
+    return (categoryDom.innerHTML = result);
+  }
 }
 
 export default new CategoryView(); 

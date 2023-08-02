@@ -52,12 +52,29 @@ class ProductView {
                 class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
                 >${p.qty}</span
               >
-              <i class="fa fa-trash-alt fa-lg text-red-400"></i>
+              <i id="delete-product-btn" data-id=${
+                p.id
+              } class="fa fa-trash-alt fa-lg text-red-400 cursor-pointer"></i>
             </div>
           </div>
         </div>`);
     });
     productList.innerHTML = result;
+    const deleteProductBtns = [
+      ...document.querySelectorAll("#delete-product-btn"),
+    ];
+    deleteProductBtns.map((btn) =>
+      btn.addEventListener("click", () => this._deleteProduct(btn.dataset.id))
+    );
+  }
+  _deleteProduct(id) {
+    console.log(id);
+    const filteredProducts = this.products.filter(
+      (p) => Number(p.id) !== Number(id)
+    );
+    this.products = filteredProducts;
+    localStorage.setItem("products", JSON.stringify(filteredProducts));
+    this.createProductListView(filteredProducts);
   }
 }
 

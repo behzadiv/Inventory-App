@@ -17,8 +17,32 @@ export default class Storage {
     return allCategories.sort((a, b) => {
       return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() >
         0
-        ? 1
-        : -1;
+        ? -1
+        : 1;
     });
+  }
+  static getAllProducts() {
+    const allProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+    return allProducts.sort((a, b) => {
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() >
+        0
+        ? -1
+        : 1;
+    });
+  }
+  static saveProducts(productToSave) {
+    const allProducts = Storage.getAllProducts();
+    const existedProduct = allProducts.find((p) => p.id === productToSave.id);
+    if (existedProduct) {
+      existedProduct.title = productToSave.title;
+      existedProduct.qty = productToSave.qty;
+      existedProduct.category = productToSave.category;
+    } else {
+      productToSave.id = new Date().getTime();
+      productToSave.createdAt = new Date().toISOString();
+      allProducts.push(productToSave);
+    }
+    localStorage.setItem("products", JSON.stringify(allProducts));
   }
 }

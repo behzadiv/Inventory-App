@@ -76,6 +76,12 @@ class ProductView {
     localStorage.setItem("products", JSON.stringify(filteredProducts));
     this.createProductListView(filteredProducts);
   }
+  productSearch(title) {
+    const searchedProducts = this.products.filter((p) => {
+      return p.title.trim().toLowerCase().includes(title.trim().toLowerCase());
+    });
+    this.createProductListView(searchedProducts);
+  }
 }
 
 export default new ProductView();

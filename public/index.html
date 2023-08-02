@@ -23,7 +23,10 @@
         class="flex flex-1 flex-col text-center gap-y-2 border border-slate-300 rounded-md p-4"
       >
         <h1 class="font-bold">Add New Category</h1>
-        <form class="flex flex-col text-start gap-y-1">
+        <form
+          name="category"
+          class="flex flex-col text-start gap-y-1"
+        >
           <label for="category-title" class="text-xs px-1"
             >Category Title :</label
           >
@@ -54,6 +57,7 @@
               Cancel
             </button>
             <button
+              id="category-add-btn"
               class="border bg-blue-300 rounded-md flex-1 text-white py-1 cursor-pointer"
             >
               Add
@@ -91,14 +95,15 @@
             />
           </div>
           <div class="flex flex-col text-start gap-y-1">
-            <label  name="select-category"class="text-xs px-1">Product Category :</label>
+            <label name="select-category" class="text-xs px-1"
+              >Product Category :</label
+            >
             <select
               class="border border-slate-300 rounded-md p-1 px-3"
               name="select-category"
               id="select-category"
             >
-              <option value="backend">back-end</option>
-              <option value="frontend">front-end</option>
+              
             </select>
           </div>
           <button
@@ -259,6 +264,7 @@
       </div>
     </section>
   </body>
+  <script src="../src/js/app.js" type="module"></script>
   <script
     src="https://kit.fontawesome.com/3ae8181c46.js"
     crossorigin="anonymous"

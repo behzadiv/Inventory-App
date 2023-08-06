@@ -4,7 +4,10 @@ class ProductView {
   constructor() {
     this.products = [];
     const addProductBtn = document.querySelector("#product-add-btn");
+    const searchInput = document.querySelector("#product-search");
     addProductBtn.addEventListener("click", (e) => this.addNewProduct(e));
+    searchInput.addEventListener("input", (e) =>this.productSearch(e.target.value)
+);
   }
   addNewProduct(e) {
     e.preventDefault();
@@ -68,7 +71,6 @@ class ProductView {
     );
   }
   _deleteProduct(id) {
-    console.log(id);
     const filteredProducts = this.products.filter(
       (p) => Number(p.id) !== Number(id)
     );

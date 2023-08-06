@@ -21,15 +21,24 @@ export default class Storage {
         : 1;
     });
   }
-  static getAllProducts() {
+  static getAllProducts(sort = "Newest") {
     const allProducts = JSON.parse(localStorage.getItem("products")) || [];
-
-    return allProducts.sort((a, b) => {
-      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() >
-        0
-        ? -1
-        : 1;
-    });
+    if(sort === "Newest"){
+      return allProducts.sort((a, b) => {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() >
+          0
+          ? -1
+          : 1;
+      });
+    }
+    else if(sort ==="Oldest"){
+      return allProducts.sort((a, b) => {
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime() <
+          0
+          ? -1
+          : 1;
+      });
+    }
   }
   static saveProducts(productToSave) {
     const allProducts = Storage.getAllProducts();

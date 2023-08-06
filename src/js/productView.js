@@ -5,9 +5,10 @@ class ProductView {
     this.products = [];
     const addProductBtn = document.querySelector("#product-add-btn");
     const searchInput = document.querySelector("#product-search");
+    const sort = document.querySelector("#sort")
     addProductBtn.addEventListener("click", (e) => this.addNewProduct(e));
-    searchInput.addEventListener("input", (e) =>this.productSearch(e.target.value)
-);
+    searchInput.addEventListener("input", (e) =>this.productSearch(e.target.value));
+    sort.addEventListener("input", (e) =>this.sortProducts(e.target.value));
   }
   addNewProduct(e) {
     e.preventDefault();
@@ -83,6 +84,10 @@ class ProductView {
       return p.title.trim().toLowerCase().includes(title.trim().toLowerCase());
     });
     this.createProductListView(searchedProducts);
+  }
+  sortProducts(value){
+    this.products = Storage.getAllProducts(value)
+    this.createProductListView(this.products)
   }
 }
 

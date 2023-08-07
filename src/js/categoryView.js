@@ -20,11 +20,11 @@ class CategoryView {
   setApp() {
     this.categories = Storage.getAllCategories();
   }
-  createCategoryList() {
+  createCategoryList(category) {
     const categoryDom = document.querySelector("#select-category");
     let result = `<option value="">Select Category</option>`;
     this.categories.forEach(
-      (c) => (result += `<option value=${c.id}>${c.title}</option>`)
+      (c) => (result += `<option value=${c.id} ${c.title===category ? "selected" : ""}>${c.title}</option>`)
     );
     return (categoryDom.innerHTML = result);
   }

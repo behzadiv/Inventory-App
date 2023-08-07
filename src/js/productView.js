@@ -1,16 +1,18 @@
+import categoryView from "./categoryView.js";
 import Storage from "./storage.js";
 
 class ProductView {
   constructor() {
     this.products = [];
+    this.existProductId = ""
     const addProductBtn = document.querySelector("#product-add-btn");
     const searchInput = document.querySelector("#product-search");
     const sort = document.querySelector("#sort")
-    addProductBtn.addEventListener("click", (e) => this.addNewProduct(e));
+    addProductBtn.addEventListener("click", (e) => this.addNewProduct(e,this.existProductId));
     searchInput.addEventListener("input", (e) =>this.productSearch(e.target.value));
     sort.addEventListener("input", (e) =>this.sortProducts(e.target.value));
   }
-  addNewProduct(e) {
+  addNewProduct(e,existProductId) {
     e.preventDefault();
     const productTitle = document.forms["product"]["product-title"].value;
     const productQty = document.forms["product"]["product-qty"].value;
@@ -19,20 +21,16 @@ class ProductView {
     const productCategoryTitle = this._getCategoryTitle(productCategoryId);
     if (!productTitle || !productQty || !productCategoryTitle) return;
     Storage.saveProducts({
+      id:Number(existProductId),
       title: productTitle,
       qty: productQty,
       category: productCategoryTitle,
     });
     this.products = Storage.getAllProducts();
     this.createProductListView(this.products);
+    this.existProductId =""
+    this._resetForm()
   }
-  _getCategoryTitle(id) {
-    const findedCategory = Storage.getAllCategories().find(
-      (c) => Number(c.id) === Number(id)
-    );
-    return findedCategory.title;
-  }
-
   setApp() {
     this.products = Storage.getAllProducts();
   }
@@ -44,7 +42,7 @@ class ProductView {
           <div
             class="flex justify-between items-center w-full bg-white border border-slate-300 rounded-md px-2 py-1"
           >
-            <h2 class="flex-4">${p.title}</h2>
+            <h2 class="flex-4" id={product-title} data-id=${p.id}>${p.title}</h2>
             <div class="flex flex-8 items-center gap-x-3">
               <p>${new Date(p.createdAt).toLocaleDateString()}</p>
               <p
@@ -56,6 +54,9 @@ class ProductView {
                 class="bg-slate-500 rounded-md flex justify-center items-center text-white text-xs py-1 px-2"
                 >${p.qty}</span
               >
+              <i id="edit-product-btn" data-id=${
+                p.id
+              } class="fa fa-pencil-alt text-blue-400 cursor-pointer"></i>
               <i id="delete-product-btn" data-id=${
                 p.id
               } class="fa fa-trash-alt fa-lg text-red-400 cursor-pointer"></i>
@@ -67,9 +68,21 @@ class ProductView {
     const deleteProductBtns = [
       ...document.querySelectorAll("#delete-product-btn"),
     ];
+    const editProductBtns = [
+      ...document.querySelectorAll("#edit-product-btn"),
+    ];
     deleteProductBtns.map((btn) =>
       btn.addEventListener("click", () => this._deleteProduct(btn.dataset.id))
     );
+    editProductBtns.map((btn) =>
+      btn.addEventListener("click", () => this._updateProduct(btn.dataset.id))
+    );
+  }
+  _getCategoryTitle(id) {
+    const findedCategory = Storage.getAllCategories().find(
+      (c) => Number(c.id) === Number(id)
+    );
+    return findedCategory.title;
   }
   _deleteProduct(id) {
     const filteredProducts = this.products.filter(
@@ -78,6 +91,21 @@ class ProductView {
     this.products = filteredProducts;
     localStorage.setItem("products", JSON.stringify(filteredProducts));
     this.createProductListView(filteredProducts);
+  }
+  _updateProduct(id){
+    this.existProductId = id
+    const findProduct = this.products.find(p=>Number(p.id)===Number(id))
+    document.forms["product"]["product-title"].value=findProduct.title
+    document.forms["product"]["product-qty"].value = findProduct.qty
+    document.forms["product"]["select-category"].selected= findProduct.id
+    categoryView.createCategoryList(findProduct.category)
+    document.querySelector("#product-add-btn").innerHTML = "Update"
+  }
+  _resetForm(){
+    document.forms["product"]["product-title"].value=""
+    document.forms["product"]["product-qty"].value = ""
+    categoryView.createCategoryList()
+    document.querySelector("#product-add-btn").innerHTML = "Add"
   }
   productSearch(title) {
     const searchedProducts = this.products.filter((p) => {
